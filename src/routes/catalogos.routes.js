@@ -16,6 +16,7 @@ router.get(
     catalogosController.regiones
 );
 
+
 router.get(
     '/regiones/:idRegion/provincias',
     catalogosController.provinciasPorRegion
