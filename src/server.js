@@ -1,9 +1,18 @@
-require('dotenv').config();
+require('dotenv').config()
 
-const app = require('./app');
+const app = require('./app')
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000
 
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+const server = app.listen(PORT, () => {
+    console.log(`Servidor iniciado en el puerto ${PORT}`)
+})
+
+process.on('SIGTERM', () => {
+    console.log('SIGTERM recibido. Cerrando servidor...')
+
+    server.close(() => {
+        console.log('Servidor cerrado.')
+        process.exit(0)
+    })
+})
